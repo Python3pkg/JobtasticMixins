@@ -90,8 +90,8 @@ class AVGTimeRedis(object):
             time before task would be executed
         """
         tasks_reserved = inspect().reserved()
-        count_workers = len(tasks_reserved.keys())
-        count_tasks_reserved = sum(len(v) for k,v in tasks_reserved.items()) or 1
+        count_workers = len(list(tasks_reserved.keys()))
+        count_tasks_reserved = sum(len(v) for k,v in list(tasks_reserved.items())) or 1
         avg_time = cls.celery_avg_time_task() or cls.default_avg_time
         if count_tasks_reserved == 1:
             return avg_time * count_tasks_reserved
